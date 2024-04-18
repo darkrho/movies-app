@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import { StyleSheet, Text, View, TextInput} from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
+import { Pressable, Modal, ScrollView, ActivityIndicator} from 'react-native';
 
 
 function App() {
@@ -28,6 +28,47 @@ function App() {
   }
   return (
     <>
+      <Modal 
+        style={styles.modalSettings}
+        animationType="fade"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={
+          ()=> {
+            setModalVisible(false)
+          }
+        }
+      >
+        {(!isLoading) ? 
+        <ScrollView>
+
+          <Image 
+            source={{ uri: searchResult.Poster}}
+            style={styles.backgroundImage}
+            resizeMode='contain'
+          />
+          <Text>Title: {searchResult.Title}</Text>
+          <Text>Type: {searchResult.Type}</Text>
+          <Text>Genre: {searchResult.Genre}</Text>
+          <Text>Actors: {searchResult.Actors}</Text>
+          <Text>Awards: {searchResult.Awards}</Text>
+          <Text>Director: {searchResult.Director}</Text>
+          <Text>Languages: {searchResult.Languages}</Text>
+          <Text>Sinopsis: {searchResult.Sinopsis}</Text>
+          <Text>Released: {searchResult.Released}</Text>
+          <Text>Runtime: {searchResult.Runtime}</Text>
+          <Text>Writer: {searchResult.Writer}</Text>
+          <Text>ImdbRating: {searchResult.ImdbRating}</Text>
+          <Text>ImdbVotes: {searchResult.ImdbVotes}</Text>
+          <Text>Seasons: {searchResult.Seasons}</Text>
+        </ScrollView>
+         
+        :
+          <View style={[styles.container]}>
+            <ActivityIndicator size={100} color="#4CB53D" />
+          </View>     
+        }
+      </Modal>
       <View style={styles.container}>
         <Text style={styles.title}>IMDb API</Text>
         <Text>The Open Movie Database</Text>
@@ -36,7 +77,7 @@ function App() {
           onChangeText={text => onChangeText(text)}
           value={value}
         />
-        <TouchableOpacity 
+        <Pressable 
           style={styles.button}
           onPress={onPress}
         />
@@ -73,6 +114,14 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     alignSelf: "stretch"
+  },
+  modalSettings: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backgroundImage: {
+    flex: 1,
+    aspectRation: 1
   }
 });
 
