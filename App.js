@@ -43,7 +43,7 @@ function App() {
         <ScrollView>
 
           <Image 
-            source={{ uri: searchResult.Poster}}
+            source={{ uri: searchResult.Poster }}
             style={styles.backgroundImage}
             resizeMode='contain'
           />
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    aspectRation: 1
+    aspectRatio: 1
   }
 });
 
